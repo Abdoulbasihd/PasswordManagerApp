@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/logo"
                     android:layout_centerHorizontal="true"
-                    android:text="Mon Gestionnaire des mots de passe"
+                    android:text="@string/my_passwords_manager"
                     android:textColor="@color/default_text_color"
                     android:textStyle="bold|italic"
                     android:id="@+id/title_text" />
@@ -115,7 +115,7 @@
                             android:layout_marginTop="@dimen/element_margin_medium"
                             android:layout_marginEnd="@dimen/element_margin_medium"
                             android:layout_marginBottom="@dimen/element_margin_medium"
-                            android:text="Vous n'avez pas de compte ? Créez-en un maintenant !"
+                            android:text="@string/not_have_account_create_now"
                             android:textColor="@color/default_text_color"
                             android:onClick="@{()->signInViewModel.onGotoSignUpTextClicked()}"
                             />

@@ -11,8 +11,8 @@ public class SignInViewModel extends BaseObservable {
 
     private SignInModel signInModel;
 
-    private String successMessage = "Login successful";
-    private String errorMessage = "Email or Password is not valid";
+    //not user delete line private String successMessage "Login successful"
+    //not used delete line private String errorMessage Email or Password is not valid"
 
 
     @Bindable

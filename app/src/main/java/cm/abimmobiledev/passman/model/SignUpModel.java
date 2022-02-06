@@ -13,6 +13,9 @@ public class SignUpModel {
     private String password;
 
     @Nullable
+    private String encryptionNotHashedKey;
+
+    @Nullable
     private String phone;
 
     @Nullable
@@ -20,12 +23,22 @@ public class SignUpModel {
 
     private boolean fullAccount = false; //is true if is using online and offline account. false if only offline is used
 
-    public SignUpModel(@Nullable String names, @Nullable String username, @Nullable String password, @Nullable String phone, @Nullable String email) {
+    /**
+     *
+     * @param names String user's complete names
+     * @param username String user's username
+     * @param password String password
+     * @param encryptionNotHashedKey String not hashed key to be hashed and used as encryption key. Default same as password
+     * @param phone String user's phone number
+     * @param email String user's mail address
+     */
+    public SignUpModel(@Nullable String names, @Nullable String username, @Nullable String password, @Nullable String encryptionNotHashedKey, @Nullable String phone, @Nullable String email) {
         this.names = names;
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
+        this.encryptionNotHashedKey = encryptionNotHashedKey;
     }
 
     public boolean isFullAccount() {
@@ -34,6 +47,15 @@ public class SignUpModel {
 
     public void setFullAccount(boolean fullAccount) {
         this.fullAccount = fullAccount;
+    }
+
+    @Nullable
+    public String getEncryptionNotHashedKey() {
+        return encryptionNotHashedKey;
+    }
+
+    public void setEncryptionNotHashedKey(@Nullable String encryptionNotHashedKey) {
+        this.encryptionNotHashedKey = encryptionNotHashedKey;
     }
 
     @Nullable
