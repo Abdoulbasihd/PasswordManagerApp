@@ -18,12 +18,22 @@ public class SignUpModel {
     @Nullable
     private String email;
 
+    private boolean fullAccount = false; //is true if is using online and offline account. false if only offline is used
+
     public SignUpModel(@Nullable String names, @Nullable String username, @Nullable String password, @Nullable String phone, @Nullable String email) {
         this.names = names;
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.email = email;
+    }
+
+    public boolean isFullAccount() {
+        return fullAccount;
+    }
+
+    public void setFullAccount(boolean fullAccount) {
+        this.fullAccount = fullAccount;
     }
 
     @Nullable

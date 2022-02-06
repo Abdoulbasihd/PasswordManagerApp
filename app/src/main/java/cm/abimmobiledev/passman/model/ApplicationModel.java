@@ -16,15 +16,13 @@ public class ApplicationModel {
     @Nullable
     private String logo;
 
-    @Nullable
-    private boolean isSavedOnline;
+    private boolean isSavedOnline = false;
 
-    public ApplicationModel(@Nullable String name, @Nullable String description, @Nullable String password, @Nullable String logo, boolean isSavedOnline) {
+    public ApplicationModel(@Nullable String name, @Nullable String description, @Nullable String password, @Nullable String logo) {
         this.name = name;
         this.description = description;
         this.password = password;
         this.logo = logo;
-        this.isSavedOnline = isSavedOnline;
     }
 
     public boolean isSavedOnline() {
