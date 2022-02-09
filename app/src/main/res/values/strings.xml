@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">Password Manager App</string>
+    <string name="app_name">My Passwords</string>
+    <string name="user_name">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="sign_in">Se connecter</string>
+    <string name="phone">Téléphone</string>
+    <string name="mail_address">Adresse e-mail</string>
+    <string name="encrypt_key">Clef de chiffrement</string>
+    <string name="create_my_account">Créer mon compte</string>
+    <string name="local_only">Local Uniquement</string>
+    <string name="local_and_distant_on_server"><![CDATA[Local & distant (sur serveur)]]></string>
+    <string name="have_account_sign_in_now">Vous avez déjà un compte ? Connectez-vous maintenant !</string>
+    <string name="my_passwords_manager">Mon Gestionnaire des mots de passe</string>
+    <string name="not_have_account_create_now">Vous n\'avez pas de compte ? Créez-en un maintenant !</string>
+    <string name="confirm_password">Confirmer mot de passe</string>
+    <string name="password_and_confirm_password_must_be_identical">Mot de passe et confirmation de mot de passe doivent être identique</string>
+    <string name="compete_names">Noms complet</string>
 </resources>
