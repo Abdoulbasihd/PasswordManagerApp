@@ -25,7 +25,7 @@ public abstract class PassManAppDatabase extends RoomDatabase {
             passManAppDatabaseInstance = Room.databaseBuilder(appContext.getApplicationContext(),
                     PassManAppDatabase.class,
                     "pass-man-db")
-                    .allowMainThreadQueries()
+                   // allowMainThreadQueries ?
                     .fallbackToDestructiveMigration()
                     .build();
         }

@@ -1,6 +1,6 @@
 package cm.abimmobiledev.passman.ui.user;
 
-import android.os.AsyncTask;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import cm.abimmobiledev.passman.R;
 import cm.abimmobiledev.passman.database.PassManAppDatabase;
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding activityLoginBinding;
     private static final String TAG_LOG = "PM_LOG";
+    ProgressDialog dialogLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +47,13 @@ public class LoginActivity extends AppCompatActivity {
             String pass = signInViewModel.getPassword();
 
             if (usernameAndPassFilled(username, pass)){
-                Toast.makeText(LoginActivity.this, "coming up", Toast.LENGTH_SHORT).show();
 
-                UserVerificationTaskTask userVerificationTaskTask = new UserVerificationTaskTask();
-                userVerificationTaskTask.execute(username, pass);
+                dialogLogin = new ProgressDialog(LoginActivity.this);
+                dialogLogin.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialogLogin.setCanceledOnTouchOutside(false);
+                dialogLogin.setTitle("Vérification du compte en cours...");
+                dialogLogin.show();
+                databaseAccountVerifier(username, pass);
 
 
                 return;
@@ -70,11 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         if (userName.contains("\"") || userName.contains("'"))
             return false;
 
-        if (pass.contains("\"") || pass.contains("'"))
-            return false;
+        return !pass.contains("\"") && !pass.contains("'");
 
         //return pass.length() >= 8;
-        return true;
     }
 
     public boolean accountVerified(User user, String password) {
@@ -106,43 +110,52 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-    private class UserVerificationTaskTask extends AsyncTask<String, Integer, Boolean> {
-        protected Boolean doInBackground(String... params) {
+    public void databaseAccountVerifier(String username, String password){
+        ExecutorService accountVerifierService = Executors.newSingleThreadExecutor();
+        accountVerifierService.execute(() -> {
+            // on pre execute
+  /*  runOnUiThread(() -> {
+        dialogLogin = new ProgressDialog(LoginActivity.this);
+        dialogLogin.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialogLogin.setCanceledOnTouchOutside(false);
+        dialogLogin.setTitle("Vérification du compte en cours...");
+        dialogLogin.show();
+    });*/
+
+            //do in background ??
             // code that will run in the background
-            PassManAppDatabase passManAppDatabaseLG;
-            passManAppDatabaseLG = PassManAppDatabase.getInstance(getApplicationContext());
+            PassManAppDatabase passManAppDatabaseLG =
+                    PassManAppDatabase.getInstance(getApplicationContext());
 
-            Log.d(TAG_LOG, "doInBackground: params 0, "+params[0]);
-            Log.d(TAG_LOG, "doInBackground: params 1, "+params[1]);
-            User user = passManAppDatabaseLG.userDAO().findByUsername(params[0]);
+            Log.d(TAG_LOG, "doInBackground: params 0, "+username);
+            Log.d(TAG_LOG, "doInBackground: params 1, "+password);
+            User user = passManAppDatabaseLG.userDAO().findByUsername(username);
 
-            if (user==null){
+            if (user==null || !accountVerified(user, password)){
                 Log.d(TAG_LOG, "doInBackground: user not found ");
-                return false;
+                //post execute case 1
+                runOnUiThread(() -> {
+                    setLoginPasswordInputError(getString(R.string.username_or_password_incorrect));
+                    dialogLogin.dismiss();
+                });
+                return;
             }
 
-            if (accountVerified(user, params[1])) {
-                Toast.makeText(getApplicationContext(), "Opening main... coming up", Toast.LENGTH_SHORT).show();
-                //TODO : opening menu
-                return true;
-            }
 
-            return true;
-        }
+            //post execute case 2
+            runOnUiThread(() -> {
+                dialogLogin.dismiss();
+                Navigator.openMainMenuPage(LoginActivity.this, username, user.getEncryptionKey());
+            });
 
-        protected void onProgressUpdate(Integer... progress) {
-            // receive progress updates from doInBackground
-        }
+        });
 
-        protected void onPostExecute(Boolean result) {
-            // update the UI after background processes completes
-            if (!result){
-               // activityLoginBinding.inputUsername.setError("");
-               // activityLoginBinding.inputPassword.setError("");
-               // Toast.makeText(getApplicationContext(), "Nom d'utilisateur ou mot de passe incorrect", Toast.LENGTH_LONG).show();
-                //TODO : open main here
-            }
-        }
     }
+
+    private void setLoginPasswordInputError(String error) {
+        activityLoginBinding.inputUsername.setError(error);
+        activityLoginBinding.inputPassword.setError(error);
+    }
+
 
 }
