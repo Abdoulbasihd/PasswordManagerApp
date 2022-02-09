@@ -2,13 +2,14 @@ package cm.abimmobiledev.passman.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
 public class User {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
-    public final int userId;
+    public int userId;
 
     @ColumnInfo(name = "names")
     public final String names;
@@ -31,8 +32,7 @@ public class User {
     @ColumnInfo(name = "fullAccount")
     public final boolean fullAccount; //is true if is using online and offline account. false if only offline is used
 
-    public User(final int userId, String names, String username, String password, String encryptionKey, String phone, String email, boolean fullAccount) {
-        this.userId = userId;
+    public User(String names, String username, String password, String encryptionKey, String phone, String email, boolean fullAccount) {
         this.names = names;
         this.username = username;
         this.password = password;
@@ -40,5 +40,41 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.fullAccount = fullAccount;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEncryptionKey() {
+        return encryptionKey;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isFullAccount() {
+        return fullAccount;
     }
 }

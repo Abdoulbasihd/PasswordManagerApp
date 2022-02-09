@@ -43,6 +43,9 @@ dependencies {
 
     implementation 'androidx.databinding:databinding-runtime:7.1.1'
 
+
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
+    
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // optional - RxJava2 support for Room

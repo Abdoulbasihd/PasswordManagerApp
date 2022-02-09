@@ -17,7 +17,8 @@ public interface UserDAO {
     @Query("SELECT * FROM users WHERE user_id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 
-    @Query("SELECT * FROM users WHERE names LIKE :username LIMIT 1")
+    //    @Query("SELECT * FROM users WHERE username LIKE :username LIMIT 1")
+    @Query("SELECT * FROM users WHERE username = :username")
     User findByUsername(String username);
 
     //may be you could add find by phone and by email ?
@@ -27,4 +28,5 @@ public interface UserDAO {
 
     @Delete
     void delete(User user);
+
 }

@@ -61,6 +61,16 @@ public class SignUpViewModel extends BaseObservable {
     }
 
     @Bindable
+    public String getConfirmPassword(){
+        return  signUpModel.getConfirmPassword();
+    }
+
+    public void setConfirmPassword(String confirmPassword){
+        signUpModel.setConfirmPassword(confirmPassword);
+        notifyPropertyChanged(BR.confirmPassword);
+    }
+
+    @Bindable
     public  boolean isFullAccount(){
         return signUpModel.isFullAccount();
     }
@@ -81,6 +91,6 @@ public class SignUpViewModel extends BaseObservable {
     }
 
     public SignUpViewModel() {
-        signUpModel = new SignUpModel("", "", "", "", "", "");
+        signUpModel = new SignUpModel("", "", "",  "","", "", "");
     }
 }

@@ -13,6 +13,9 @@ public class SignUpModel {
     private String password;
 
     @Nullable
+    private String confirmPassword;
+
+    @Nullable
     private String encryptionNotHashedKey;
 
     @Nullable
@@ -28,14 +31,16 @@ public class SignUpModel {
      * @param names String user's complete names
      * @param username String user's username
      * @param password String password
+     * @param confirmPassword String password confirmation
      * @param encryptionNotHashedKey String not hashed key to be hashed and used as encryption key. Default same as password
      * @param phone String user's phone number
      * @param email String user's mail address
      */
-    public SignUpModel(@Nullable String names, @Nullable String username, @Nullable String password, @Nullable String encryptionNotHashedKey, @Nullable String phone, @Nullable String email) {
+    public SignUpModel(@Nullable String names, @Nullable String username, @Nullable String password, @Nullable String confirmPassword, @Nullable String encryptionNotHashedKey, @Nullable String phone, @Nullable String email) {
         this.names = names;
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.phone = phone;
         this.email = email;
         this.encryptionNotHashedKey = encryptionNotHashedKey;
@@ -101,5 +106,14 @@ public class SignUpModel {
 
     public void setEmail(@Nullable String email) {
         this.email = email;
+    }
+
+    @Nullable
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(@Nullable String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

@@ -15,9 +15,9 @@ import androidx.room.PrimaryKey;
         onDelete = CASCADE))
 public class Application {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "app_id")
-    public final int appId;
+    public int appId;
 
     @ColumnInfo(name = "owner_user_id")
     public final int ownerUserId;
@@ -37,13 +37,44 @@ public class Application {
     @ColumnInfo(name = "saved_on_line")
     public final boolean savedOnline;
 
-    public Application(final int appId, final int ownerUserId, String name, String description, String password, String logo, boolean savedOnline) {
-        this.appId = appId;
+    public Application(final int ownerUserId, String name, String description, String password, String logo, boolean savedOnline) {
         this.ownerUserId = ownerUserId;
         this.name = name;
         this.description = description;
         this.password = password;
         this.logo = logo;
         this.savedOnline = savedOnline;
+    }
+
+    public int getAppId() {
+        return appId;
+    }
+
+    public void setAppId(int appId) {
+        this.appId = appId;
+    }
+
+    public int getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public boolean isSavedOnline() {
+        return savedOnline;
     }
 }

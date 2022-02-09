@@ -62,7 +62,7 @@
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="70dp"
-                                android:hint="@string/user_name"
+                                android:hint="@string/compete_names"
                                 android:textColorHint="@color/default_text_color"
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
@@ -160,7 +160,7 @@
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="70dp"
-                                android:hint="@string/password"
+                                android:hint="@string/confirm_password"
                                 app:endIconMode="password_toggle"
                                 android:textColorHint="@color/default_text_color"
                                 android:layout_marginStart="@dimen/element_margin_medium"
@@ -173,6 +173,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="60dp"
                                     android:inputType="textPassword"
+                                    android:text="@={signUpViewModel.confirmPassword}"
                                     />
 
                             </com.google.android.material.textfield.TextInputLayout>

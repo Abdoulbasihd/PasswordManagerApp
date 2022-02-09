@@ -12,4 +12,7 @@
     <string name="have_account_sign_in_now">Vous avez déjà un compte ? Connectez-vous maintenant !</string>
     <string name="my_passwords_manager">Mon Gestionnaire des mots de passe</string>
     <string name="not_have_account_create_now">Vous n\'avez pas de compte ? Créez-en un maintenant !</string>
+    <string name="confirm_password">Confirmer mot de passe</string>
+    <string name="password_and_confirm_password_must_be_identical">Mot de passe et confirmation de mot de passe doivent être identique</string>
+    <string name="compete_names">Noms complet</string>
 </resources>
