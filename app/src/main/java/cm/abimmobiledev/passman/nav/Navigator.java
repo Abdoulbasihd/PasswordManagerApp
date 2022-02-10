@@ -37,4 +37,16 @@ public class Navigator {
         toMenuAct.startActivity(intent);
         toMenuAct.finish();
     }
+
+    public static void openAppsPage(Activity toAppsAct, String username, String encryptKey){
+
+        Bundle menuBundle = new Bundle();
+        menuBundle.putString(USER_NAME_INTENT, username);
+        menuBundle.putString(ENCRYPT_KEY_INTENT, encryptKey);
+
+        Intent intent = new Intent(toAppsAct, MainActivity.class);
+
+        toAppsAct.startActivity(intent);
+        toAppsAct.finish();
+    }
 }

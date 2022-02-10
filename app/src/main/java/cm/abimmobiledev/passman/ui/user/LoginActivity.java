@@ -3,7 +3,6 @@ package cm.abimmobiledev.passman.ui.user;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -113,14 +112,7 @@ public class LoginActivity extends AppCompatActivity {
     public void databaseAccountVerifier(String username, String password){
         ExecutorService accountVerifierService = Executors.newSingleThreadExecutor();
         accountVerifierService.execute(() -> {
-            // on pre execute
-  /*  runOnUiThread(() -> {
-        dialogLogin = new ProgressDialog(LoginActivity.this);
-        dialogLogin.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialogLogin.setCanceledOnTouchOutside(false);
-        dialogLogin.setTitle("Vérification du compte en cours...");
-        dialogLogin.show();
-    });*/
+            // on pre execute : no thing really to do here. code of loader move up before calling this methode
 
             //do in background ??
             // code that will run in the background
