@@ -1,14 +1,18 @@
 package cm.abimmobiledev.passman.ui.user;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
-import android.os.AsyncTask;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.google.android.material.snackbar.Snackbar;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import cm.abimmobiledev.passman.R;
 import cm.abimmobiledev.passman.database.PassManAppDatabase;
@@ -22,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ActivitySignUpBinding activitySignUpBinding;
     private static final String TAG_SIGN = "PM_SIGN_UP";
+    ProgressDialog userInsertProgress;
 
 
     @Override
@@ -36,6 +41,12 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         activitySignUpBinding.signUp.setOnClickListener(v -> {
+            userInsertProgress = new ProgressDialog(SignUpActivity.this);
+            userInsertProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            userInsertProgress.setCanceledOnTouchOutside(false);
+            userInsertProgress.setTitle("Sauvegarde du nouveau compte en cours...");
+            userInsertProgress.show();
+
             SignUpViewModel signUpViewModel = activitySignUpBinding.getSignUpViewModel();
 
             boolean fullAcc = !activitySignUpBinding.radioLocalOnly.isChecked();
@@ -43,10 +54,13 @@ public class SignUpActivity extends AppCompatActivity {
             if (!signUpViewModel.getPassword().equals(signUpViewModel.getConfirmPassword())) {
                 activitySignUpBinding.inputPassword.setText(getString(R.string.password_and_confirm_password_must_be_identical));
                 activitySignUpBinding.inputConfirmPassword.setText(getString(R.string.password_and_confirm_password_must_be_identical));
+                userInsertProgress.dismiss();
                 return;
             }
 
             try {
+
+
                 String hashedPass = Util.computeHash(signUpViewModel.getPassword());
                 String hashedKey = Util.computeHash(signUpViewModel.getEncryptionNotHashedKey());
                 User user = new User(signUpViewModel.getNames(),
@@ -54,9 +68,8 @@ public class SignUpActivity extends AppCompatActivity {
                         signUpViewModel.getPhone(), signUpViewModel.getEmail(), fullAcc
                 );
 
-                //passManAppDatabase.userDAO().insertAll(user);
-                InsertUserTaskTask insertUserTaskTask = new InsertUserTaskTask();
-                insertUserTaskTask.execute(user);
+
+                insertNewUser(user);
 
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 Log.d(TAG_SIGN, "adding user to db: "+e.getLocalizedMessage(), e);
@@ -65,38 +78,35 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private class InsertUserTaskTask extends AsyncTask<User, Integer, Boolean> {
+    private void insertNewUser(User user){
+        ExecutorService userInsertService = Executors.newSingleThreadExecutor();
+        userInsertService.execute((Runnable) () -> {
 
+            // on pre execute
 
-        protected Boolean doInBackground(User... users) {
-            // code that will run in the background
-            PassManAppDatabase passManAppDatabase;
-            passManAppDatabase = PassManAppDatabase.getInstance(getApplicationContext());
+            //do in background
+            PassManAppDatabase  passManAppDatabase =
+                    PassManAppDatabase.getInstance(getApplicationContext());
 
-            if (users[0]==null )
-                return false;
+            User testUserExistence = passManAppDatabase.userDAO().findByUsername(user.getUsername());
 
-            User test = passManAppDatabase.userDAO().findByUsername(users[0].getUsername());
-
-            if (test==null){
+            if (testUserExistence==null){
                 //doesn't exist
-                passManAppDatabase.userDAO().insertAll(users[0]);
-                return true;
+                passManAppDatabase.userDAO().insertAll(user);
 
             } else {
-                Log.d(TAG_SIGN, "doInBackground: user already exist, username :"+test.getUsername());
-                return false;
+                Log.d(TAG_SIGN, "doInBackground: user already exist, username :"+testUserExistence.getUsername());
+                runOnUiThread(() -> Snackbar.make(activitySignUpBinding.getRoot(), "Le nom d'utilisateur est déjà pris, bien vouloir choisir un autre", Snackbar.LENGTH_LONG).show());
             }
 
-        }
 
-        protected void onProgressUpdate(Integer... progress) {
-// receive progress updates from doInBackground
-        }
+            // on post execute
+            runOnUiThread(() -> {
+                userInsertProgress.dismiss();
+                Navigator.openSignInPage(SignUpActivity.this);
+            });
+        });
 
-        protected void onPostExecute(Boolean result) {
-            // update the UI after background processes completes
-        }
     }
 
 }

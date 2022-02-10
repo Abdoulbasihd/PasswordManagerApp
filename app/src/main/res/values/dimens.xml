@@ -4,4 +4,5 @@
     <dimen name="default_card_elevation">3dp</dimen>
     <dimen name="default_element_margin">2dp</dimen>
     <dimen name="element_margin_medium">7dp</dimen>
+    <dimen name="title_text_size_18">18sp</dimen>
 </resources>

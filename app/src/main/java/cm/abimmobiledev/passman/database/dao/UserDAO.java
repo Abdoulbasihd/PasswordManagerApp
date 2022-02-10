@@ -18,7 +18,7 @@ public interface UserDAO {
     List<User> loadAllByIds(int[] userIds);
 
     //    @Query("SELECT * FROM users WHERE username LIKE :username LIMIT 1")
-    @Query("SELECT * FROM users WHERE username = :username")
+    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
     User findByUsername(String username);
 
     //may be you could add find by phone and by email ?
