@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
             // on post execute
             runOnUiThread(() -> {
                 userInsertProgress.dismiss();
-                Navigator.openMainMenuPage(SignUpActivity.this, user.getUsername(), user.getEncryptionKey());
+                Navigator.openSignInPage(SignUpActivity.this);
             });
         });
 

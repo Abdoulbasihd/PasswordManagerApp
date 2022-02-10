@@ -5,8 +5,10 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
-public class User {
+public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
     public int userId;

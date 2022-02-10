@@ -3,16 +3,18 @@ package cm.abimmobiledev.passman;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
+import cm.abimmobiledev.passman.database.entity.User;
 import cm.abimmobiledev.passman.databinding.ActivityMainBinding;
 import cm.abimmobiledev.passman.nav.Navigator;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG_MAIN = "PM_MAIN";
+    //may be next private static final String TAG_MAIN = "PM_MAIN"
     ActivityMainBinding activityMainBinding;
+    private User connectedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
         //no model for main
         activityMainBinding.executePendingBindings();
 
-        activityMainBinding.cardMyPassword.setOnClickListener(v -> {
-            Navigator.openAppsPage(MainActivity.this, "", "");
-        });
+        //initializing data with bundle
+        getMainBundleElements(getIntent());
+
+        activityMainBinding.cardMyPassword.setOnClickListener(v -> Navigator.openAppsPage(MainActivity.this, connectedUser));
 
         activityMainBinding.cardMyAccount.setOnClickListener(v -> {
             //TODO
@@ -37,5 +40,20 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.cardOtherSettings.setOnClickListener(v -> {
             //TODO
         });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        Navigator.openSignInPage(MainActivity.this);
+    }
+
+    public void getMainBundleElements(Intent intentBundle){
+
+        if (intentBundle==null)
+            return; // todo : throw exception here
+
+        connectedUser = (User) intentBundle.getSerializableExtra(Navigator.USER_INTENT);
+
     }
 }

@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             //post execute case 2
             runOnUiThread(() -> {
                 dialogLogin.dismiss();
-                Navigator.openMainMenuPage(LoginActivity.this, username, user.getEncryptionKey());
+                Navigator.openMainMenuPage(LoginActivity.this, user);
             });
 
         });
