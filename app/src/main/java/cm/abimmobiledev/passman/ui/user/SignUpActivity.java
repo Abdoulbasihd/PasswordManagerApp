@@ -20,7 +20,7 @@ import cm.abimmobiledev.passman.database.entity.User;
 import cm.abimmobiledev.passman.databinding.ActivitySignUpBinding;
 import cm.abimmobiledev.passman.nav.Navigator;
 import cm.abimmobiledev.passman.usefull.Util;
-import cm.abimmobiledev.passman.viewmodel.SignUpViewModel;
+import cm.abimmobiledev.passman.viewmodel.user.SignUpViewModel;
 
 public class SignUpActivity extends AppCompatActivity {
 

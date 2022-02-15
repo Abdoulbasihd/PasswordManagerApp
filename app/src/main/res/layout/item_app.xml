@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/default_card_elevation"
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        android:id="@+id/app_card"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/twotone_app_blocking_blue_900_48dp" />
+            <TextView
+                android:id="@+id/app_name"
+                android:text="My Application name"
+                android:textAlignment="center"
+                android:textColor="@color/default_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text_size_18"
+                android:layout_toEndOf="@+id/app_logo"
+                android:layout_margin="@dimen/default_element_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/app_pass"
+                android:text="My Application pass"
+                android:textAlignment="center"
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/text_body_12"
+                android:layout_below="@+id/app_name"
+                android:layout_toEndOf="@id/app_logo"
+                android:layout_marginStart="@dimen/element_margin_medium"
+                android:layout_marginTop="@dimen/default_element_margin"
+                android:layout_marginEnd="@dimen/default_element_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <ImageView
+                android:id="@+id/app_synced_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/default_element_margin"
+                android:src="@drawable/twotone_sync_lock_blue_900_48dp"
+                />
+
+            <TextView
+                android:id="@+id/text_if_or_not_off_line"
+                android:layout_below="@+id/app_synced_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="@dimen/default_element_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offline"
+                android:textColor="@color/default_text_color"
+                android:textStyle="italic"
+                />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

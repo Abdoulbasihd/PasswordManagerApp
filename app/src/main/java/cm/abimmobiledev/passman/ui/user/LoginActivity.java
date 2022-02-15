@@ -18,7 +18,7 @@ import cm.abimmobiledev.passman.database.entity.User;
 import cm.abimmobiledev.passman.databinding.ActivityLoginBinding;
 import cm.abimmobiledev.passman.nav.Navigator;
 import cm.abimmobiledev.passman.usefull.Util;
-import cm.abimmobiledev.passman.viewmodel.SignInViewModel;
+import cm.abimmobiledev.passman.viewmodel.user.SignInViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return !pass.contains("\"") && !pass.contains("'");
 
-        //return pass.length() >= 8;
+        //return pass length() >= 8
     }
 
     public boolean accountVerified(User user, String password) {

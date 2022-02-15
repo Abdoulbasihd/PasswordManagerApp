@@ -5,4 +5,9 @@
     <dimen name="default_element_margin">2dp</dimen>
     <dimen name="element_margin_medium">7dp</dimen>
     <dimen name="title_text_size_18">18sp</dimen>
+    <dimen name="title_text_size_large_20">20sp</dimen>
+    <dimen name="title_text_size_small_15">15sp</dimen>
+    <dimen name="text_body_12">12sp</dimen>
+    <dimen name="text_body_11">11sp</dimen>
+    <dimen name="text_body_10">10sp</dimen>
 </resources>

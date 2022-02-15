@@ -1,4 +1,4 @@
-package cm.abimmobiledev.passman.viewmodel;
+package cm.abimmobiledev.passman.viewmodel.user;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;

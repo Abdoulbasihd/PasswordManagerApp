@@ -6,7 +6,7 @@
     <data>
         <variable
             name="signUpViewModel"
-            type="cm.abimmobiledev.passman.viewmodel.SignUpViewModel" />
+            type="cm.abimmobiledev.passman.viewmodel.user.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
