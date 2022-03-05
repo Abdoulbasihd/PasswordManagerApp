@@ -66,6 +66,8 @@
                                 android:textColorHint="@color/default_text_color"
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_names">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -85,6 +87,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_names"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_email">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -104,6 +108,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_email"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_phone">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -124,6 +130,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_phone"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_username">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -146,6 +154,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_username"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_password">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -166,6 +176,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_password"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_confirm_password">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -177,7 +189,7 @@
                                     />
 
                             </com.google.android.material.textfield.TextInputLayout>
-                            <com.google.android.material.textfield.TextInputLayout
+                            <!--<com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="70dp"
                                 android:hint="@string/encrypt_key"
@@ -186,6 +198,8 @@
                                 android:layout_marginStart="@dimen/element_margin_medium"
                                 android:layout_marginEnd="@dimen/element_margin_medium"
                                 android:layout_below="@+id/layout_confirm_password"
+                                app:hintTextColor="@color/default_text_color"
+                                app:boxBackgroundColor="@color/default_input_color"
                                 android:id="@+id/layout_key_init_encrypt">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -196,13 +210,13 @@
                                     android:text="@={signUpViewModel.encryptionNotHashedKey}"
                                     />
 
-                            </com.google.android.material.textfield.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout> -->
 
                             <RadioGroup
                                 android:id="@+id/rg_select_mode"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/layout_key_init_encrypt"
+                                android:layout_below="@+id/layout_confirm_password"
                                 >
                                 <RadioButton
                                     android:id="@+id/radio_local_only"

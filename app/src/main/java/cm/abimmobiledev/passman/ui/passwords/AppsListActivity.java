@@ -3,14 +3,13 @@ package cm.abimmobiledev.passman.ui.passwords;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +24,12 @@ import cm.abimmobiledev.passman.databinding.ActivityAppsListBinding;
 import cm.abimmobiledev.passman.model.ApplicationModel;
 import cm.abimmobiledev.passman.nav.Navigator;
 import cm.abimmobiledev.passman.ui.passwords.adapter.PwdAdapter;
-import cm.abimmobiledev.passman.ui.user.LoginActivity;
-import cm.abimmobiledev.passman.viewmodel.user.SignInViewModel;
+import cm.abimmobiledev.passman.usefull.Util;
 
 public class AppsListActivity extends AppCompatActivity {
 
     ActivityAppsListBinding appsListBinding;
-    private static final String TAG_LOG = "PM_APPS";
+    private static final String TAG_APPS = "PM_APPS";
     ProgressDialog dialogAppsData;
     List<Application> applications;
     User ownerUser;
@@ -58,11 +56,19 @@ public class AppsListActivity extends AppCompatActivity {
         dbGetApplications();
 
         appsListBinding.addApp.setOnClickListener(v -> {
-            //TODO : Opening new app page
-            Snackbar.make(appsListBinding.appsRecycler.getRootView(), "coming up", Snackbar.LENGTH_LONG).show();
+            //TODO : replace by bottom sheet
+            Navigator.openAddAppFormPage(AppsListActivity.this, ownerUser);
         });
 
+        appsListBinding.floatingBack.setOnClickListener(v -> Navigator.openMainMenuPage(AppsListActivity.this, ownerUser));
+
     }
+
+    @Override
+    public void onBackPressed(){
+        Navigator.openMainMenuPage(AppsListActivity.this, ownerUser);
+    }
+
 
     private void dbGetApplications(){
 
@@ -81,17 +87,21 @@ public class AppsListActivity extends AppCompatActivity {
                 if (applications==null || applications.isEmpty())
                     appsListBinding.tvNoItem.setVisibility(View.VISIBLE);
                 else {
-                    PwdAdapter adapter = new PwdAdapter(convertAppModelFromApp(applications));
-                    appsListBinding.appsRecycler.setHasFixedSize(true);
-                    appsListBinding.appsRecycler.setLayoutManager(new LinearLayoutManager(this));
-                    appsListBinding.appsRecycler.setAdapter(adapter);
+                    try {
+                        PwdAdapter adapter = new PwdAdapter(convertAppModelFromApp(applications, ownerUser), ownerUser);
+                        appsListBinding.appsRecycler.setHasFixedSize(true);
+                        appsListBinding.appsRecycler.setLayoutManager(new LinearLayoutManager(this));
+                        appsListBinding.appsRecycler.setAdapter(adapter);
+                    } catch (Exception e) {
+                        Log.d(TAG_APPS, "dbGetApplications: "+e.getLocalizedMessage(), e);
+                    }
                 }
             });
         });
     }
 
 
-    public static List<ApplicationModel> convertAppModelFromApp(List<Application> applications){
+    public static List<ApplicationModel> convertAppModelFromApp(List<Application> applications, User oUser) throws Exception {
 
         List<ApplicationModel> applicationModels = new ArrayList<>();
 
@@ -100,10 +110,12 @@ public class AppsListActivity extends AppCompatActivity {
 
         for (int count = 0; count < applications.size(); count ++) {
             Application app = applications.get(count);
-            applicationModels.add(new ApplicationModel(app.getName(), app.getDescription(), app.getPassword(), app.getLogo()));
+            //app.setPassword(Util.decrypt(oUser.getEncryptionKey(), app.getPassword()));
+            applicationModels.add(new ApplicationModel(app.getName(), app.getDescription(), app.getUsername(), app.getPassword(), app.getLogo()));
         }
 
         return applicationModels;
     }
+
 
 }

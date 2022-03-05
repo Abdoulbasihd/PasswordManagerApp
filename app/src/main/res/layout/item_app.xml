@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/default_card_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius"
+        android:layout_margin="@dimen/default_element_margin"
         android:id="@+id/app_card"
         >
 
@@ -20,9 +21,10 @@
             >
 
             <ImageView
+                android:layout_margin="@dimen/element_margin_medium"
                 android:id="@+id/app_logo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:src="@drawable/twotone_app_blocking_blue_900_48dp" />
             <TextView
                 android:id="@+id/app_name"
@@ -36,22 +38,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
+
             <TextView
-                android:id="@+id/app_pass"
-                android:text="My Application pass"
-                android:textAlignment="center"
-                android:textColor="@color/default_text_color"
-                android:textSize="@dimen/text_body_12"
+                android:id="@+id/app_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/app_name"
-                android:layout_toEndOf="@id/app_logo"
                 android:layout_marginStart="@dimen/element_margin_medium"
                 android:layout_marginTop="@dimen/default_element_margin"
                 android:layout_marginEnd="@dimen/default_element_margin"
+                android:layout_toEndOf="@id/app_logo"
+                android:text="My Application's user name"
+                android:textAlignment="center"
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/text_body_12" />
+
+            <TextView
+                android:id="@+id/app_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:layout_below="@+id/app_username"
+                android:layout_marginStart="@dimen/element_margin_medium"
+                android:layout_marginTop="@dimen/default_element_margin"
+                android:layout_marginEnd="@dimen/default_element_margin"
+                android:layout_toEndOf="@id/app_logo"
+                android:text="My Application's pass"
+                android:textAlignment="center"
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/text_body_12" />
+
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/app_synced_icon"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -63,7 +81,6 @@
 
             <TextView
                 android:id="@+id/text_if_or_not_off_line"
-                android:layout_below="@+id/app_synced_icon"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="@dimen/default_element_margin"
@@ -72,6 +89,29 @@
                 android:text="@string/offline"
                 android:textColor="@color/default_text_color"
                 android:textStyle="italic"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:id="@+id/view_or_hide_pass"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/app_username"
+                android:layout_marginStart="@dimen/default_element_margin"
+                android:layout_marginTop="@dimen/default_element_margin"
+                android:layout_marginEnd="@dimen/default_element_margin"
+                android:layout_marginBottom="@dimen/default_element_margin"
+                android:layout_toStartOf="@+id/copy_password"
+                android:src="@drawable/sharp_remove_red_eye_blue_900_48dp" />
+
+            <ImageView
+                android:id="@+id/copy_password"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="@dimen/default_element_margin"
+                android:layout_below="@+id/app_username"
+                android:src="@drawable/twotone_content_copy_blue_900_48dp"
+                android:layout_alignParentEnd="true"
                 />
 
 

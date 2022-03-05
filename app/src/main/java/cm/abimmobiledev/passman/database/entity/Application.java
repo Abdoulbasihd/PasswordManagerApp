@@ -29,7 +29,10 @@ public class Application {
     public final String description;
 
     @ColumnInfo(name = "app_pass")
-    public final String password;
+    public  String password;
+
+    @ColumnInfo(name = "app_username")
+    public  String username;
 
     @ColumnInfo(name = "app_logo")
     public final String logo;
@@ -37,13 +40,14 @@ public class Application {
     @ColumnInfo(name = "saved_on_line")
     public final boolean savedOnline;
 
-    public Application(final int ownerUserId, String name, String description, String password, String logo, boolean savedOnline) {
+    public Application(final int ownerUserId, String name, String description, String username, String password, String logo, boolean savedOnline) {
         this.ownerUserId = ownerUserId;
         this.name = name;
         this.description = description;
         this.password = password;
         this.logo = logo;
         this.savedOnline = savedOnline;
+        this.username = username;
     }
 
     public int getAppId() {
@@ -62,12 +66,20 @@ public class Application {
         return name;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String pwd) {
+        this.password = pwd;
     }
 
     public String getLogo() {

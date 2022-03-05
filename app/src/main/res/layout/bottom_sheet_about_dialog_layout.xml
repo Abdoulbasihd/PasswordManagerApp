@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/default_border_margin"
+    app:cardElevation="@dimen/default_card_elevation">
+
+
+    <LinearLayout
+        android:layout_margin="@dimen/default_border_margin"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/default_text_color"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_text_size_18"
+            android:text="@string/app_name"
+            android:layout_margin="@dimen/element_margin_medium"
+            android:id="@+id/title_about"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_about"
+            android:textAlignment="textStart"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/text_body_12"
+            android:layout_margin="@dimen/default_element_margin"
+            android:text="Une application qui vous permet de garder vos mot de passe en toute sécurité; c'est le coffre fort de vos mots de passe. \n\n Avec cette application, vous pouvez retenir un seul mot de passe, le mot de passe de l'application et de retrouver les autres mots de passe dans l'application. Vous avez la possibilité d'exporter la liste de vos mots de passe vers un fichier CSV ou de reimporte (à venir)."
+            android:id="@+id/paragraph_one"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/text_body_12"
+            android:layout_margin="@dimen/default_element_margin"
+            android:text="Le code source de cette application est disponible sur GitHub à l'adresse https://github.com/Abdoulbasihd/PasswordManagerApp. Vous pouvez contribuer si vous en avez envi."
+            android:id="@+id/paragraph_two"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/text_body_12"
+            android:layout_margin="@dimen/default_element_margin"
+            android:text="\n\n Vous pourrez aussi nous contacter par mail à l'adresse abdulbasihd@gmail.com pour toute information ou suggestion. Merci d'inclure Password App dans l'object de votre message"
+            android:id="@+id/paragraph_three"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/text_body_12"
+            android:layout_margin="@dimen/default_element_margin"
+            android:text="\n\n Enfin, vous pouvez faire un don même du prix d'une tasse de thé ou de l'hébergement en faisant un transfer MTN MoMo au 237 6 77 51 50 77, OM et EUMM au 237 6 94 81 43 02"
+            android:id="@+id/paragraph_four"
+            />
+
+
+
+
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

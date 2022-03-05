@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import cm.abimmobiledev.passman.MainActivity;
 import cm.abimmobiledev.passman.database.entity.User;
+import cm.abimmobiledev.passman.ui.passwords.AddAppFormActivity;
 import cm.abimmobiledev.passman.ui.passwords.AppsListActivity;
 import cm.abimmobiledev.passman.ui.user.LoginActivity;
 import cm.abimmobiledev.passman.ui.user.SignUpActivity;
@@ -46,4 +47,14 @@ public class Navigator {
         toAppsAct.startActivity(intent);
         toAppsAct.finish();
     }
+
+    public static void openAddAppFormPage(Activity toAddAppAct, User connectedUser){
+
+        Intent intent = new Intent(toAddAppAct, AddAppFormActivity.class);
+        intent.putExtra(USER_INTENT, connectedUser);
+
+        toAddAppAct.startActivity(intent);
+        toAddAppAct.finish();
+    }
+
 }

@@ -25,4 +25,21 @@
     <string name="no_element_found">Aucun élément trouvé</string>
     <string name="adding_new_app">Ajout d\'une nouvelle application en cours...</string>
     <string name="getting_apps">Obtentions de la liste des applications en cours...</string>
+    <string name="add_new_app">Ajouter une nouvelle application</string>
+    <string name="name_of_the_application">Nom de l\'application</string>
+    <string name="new_app_description">Description de l\'application</string>
+    <string name="pwd_to_access_this_app">Mot de passe d\'accès à cette application</string>
+    <string name="confirm_access_pwd">Confirmer le mot de passe d\'accès</string>
+    <string name="add">Ajouter</string>
+    <string name="pwd_and_confirmation_must_be_equals">Le mot de passe et la confirmation doivent être identique</string>
+    <string name="required_field">Champs obligatoire</string>
+    <string name="new_app_added">Nouvelle Application ajoutée</string>
+    <string name="adding_the_new_app">Ajout de la nouvelle application en cours</string>
+    <string name="back">Retour</string>
+    <string name="copied">Copié</string>
+    <string name="app_username">Nom de l\'utilisateur (username)</string>
+    <string name="your_apps_data_have_been_exported">Les données liées à vos applications ont été exportées en .CSV et stocké à : </string>
+    <string name="csv_export">CSV Export</string>
+    <string name="csv_import_export">CSV Import/Export</string>
+    <string name="an_error_occurred_while_exporting_to_csv">Une erreur s\'est produite lors de l\'exportation. Bien vouloir vérifier que l\'application a les droits de lecture/ecriture</string>
 </resources>
