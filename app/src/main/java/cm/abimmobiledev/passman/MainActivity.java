@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
             assert exportCsv != null;
             exportCsv.setOnClickListener(viewExp -> {
-                 Toast.makeText(MainActivity.this, "Coming up", Toast.LENGTH_SHORT).show();
 
                  //set progress visible before getting data from base and write in file
                 progressDataExport.show();
