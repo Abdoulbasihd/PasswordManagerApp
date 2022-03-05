@@ -1,15 +1,21 @@
 package cm.abimmobiledev.passman;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -35,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private User connectedUser;
     ProgressDialog progressDataExport;
     AlertDialog.Builder appExportedDialog;
+
+    private static final int MY_REQUEST_CODE_PERMISSION = 1000;
+    private static final int MY_RESULT_CODE_FILE_CHOOSER = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
 
             assert importCsv != null;
-            importCsv.setOnClickListener(v1 -> Toast.makeText(MainActivity.this, "Coming up", Toast.LENGTH_SHORT).show());
+            importCsv.setOnClickListener(viewImp -> {
+                Toast.makeText(MainActivity.this, "Coming up", Toast.LENGTH_SHORT).show();
+                askPermissionAndBrowseFile();
+            });
 
             otherBottomDialog.show();
         });
@@ -158,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             //Get apps of a given user
             List<Application> userApps = passManAppDatabaseAddApp.applicationDAO().findApplicationsForUser(ownerId);
             //Write the name of the table and the name of the columns (comma separated values) in the .csv file.
-            printWriter.println("FIRST TABLE OF THE DATABASE");
+            //"FIRST TABLE OF THE DATABASE" : Ze title
             printWriter.println("app_id,owner_user_id,app_desc,app_pass,app_username,app_logo,saved_on_line");
 
             for(int line=0; line<userApps.size(); line++) {
@@ -188,6 +200,91 @@ public class MainActivity extends AppCompatActivity {
 
     public static String formatCsvRecord(Application app) {
         return app.getAppId() + "," + app.getOwnerUserId() + "," + app.getDescription() + "," + app.getPassword() + "," + app.getUsername() + "," + app.getLogo() + "," + app.isSavedOnline();
+    }
+
+    private void askPermissionAndBrowseFile()  {
+        // With Android Level >= 23, you have to ask the user
+        // for permission to access External Storage.
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) { // Level 23
+
+            // Check if we have Call permission
+            int permission = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE);
+
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // If don't have permission so prompt the user.
+                this.requestPermissions(
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_REQUEST_CODE_PERMISSION
+                );
+                return;
+            }
+        }
+        this.doBrowseFile();
+    }
+
+    private void doBrowseFile()  {
+        Intent chooseFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFileIntent.setType("*/*");
+        // Only return URIs that can be opened with ContentResolver
+        chooseFileIntent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        chooseFileIntent = Intent.createChooser(chooseFileIntent, "Selectionner le fichier CSV de vos mots de passe");
+        startActivityForResult(chooseFileIntent, MY_RESULT_CODE_FILE_CHOOSER);
+    }
+
+    // When you have the request results
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //
+        if (requestCode == MY_REQUEST_CODE_PERMISSION) {// Note: If request is cancelled, the result arrays are empty.
+            // Permissions granted (CALL_PHONE).
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Log.i(TAG_MAIN, "Permission granted!");
+                Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
+
+                this.doBrowseFile();
+            }
+            // Cancelled or denied.
+            else {
+                Log.i(TAG_MAIN, "Permission denied!");
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_RESULT_CODE_FILE_CHOOSER) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Uri fileUri = data.getData();
+                    Log.i(TAG_MAIN, "Uri: " + fileUri);
+
+                    String filePath = null;
+                    try {
+                        filePath =fileUri.getPath();
+                    } catch (Exception e) {
+                        Log.e(TAG_MAIN, "Error: " + e);
+                        Toast.makeText(this, "Error: " + e, Toast.LENGTH_SHORT).show();
+                    }
+
+                    readCsvFromFile(filePath);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    public void readCsvFromFile(String filePath) {
+        Log.d(TAG_MAIN, "readCsvFromFile: "+filePath);
     }
 
 }
