@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/default_element_margin"
+    app:cardElevation="@dimen/default_card_elevation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/export_csv"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="@dimen/element_margin_medium"
+            android:layout_marginEnd="@dimen/element_margin_medium"
+            android:layout_marginTop="@dimen/element_margin_medium"
+            android:layout_marginBottom="@dimen/default_element_margin"
+            app:cardElevation="@dimen/default_card_elevation"
+            android:padding="@dimen/default_element_margin"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+                <ImageView
+                    android:id="@+id/export_csv_icon"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/default_element_margin"
+                    android:layout_marginTop="@dimen/default_element_margin"
+                    android:layout_marginEnd="@dimen/default_element_margin"
+                    android:layout_marginBottom="@dimen/default_element_margin"
+                    android:src="@drawable/ic_twotone_keyboard_arrow_left_45"
+                    />
+
+                <View
+                    android:id="@+id/export_separator"
+                    android:layout_width="0.55dp"
+                    android:layout_height="40dp"
+                    android:layout_toEndOf="@+id/export_csv_icon"
+                    android:layout_centerVertical="true"
+                    android:background="@color/default_text_color"
+                    android:layout_margin="@dimen/default_element_margin"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/export_separator"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/default_element_margin"
+                    android:text="Exporter mes mots de passe en CSV"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="@dimen/text_body_12"
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/import_csv"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="@dimen/element_margin_medium"
+            android:layout_marginEnd="@dimen/element_margin_medium"
+            android:layout_marginBottom="@dimen/element_margin_medium"
+            app:cardElevation="@dimen/default_card_elevation"
+            android:padding="@dimen/default_element_margin"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+                <ImageView
+                    android:id="@+id/import_csv_icon"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/default_element_margin"
+                    android:layout_marginTop="@dimen/default_element_margin"
+                    android:layout_marginEnd="@dimen/default_element_margin"
+                    android:layout_marginBottom="@dimen/default_element_margin"
+                    android:src="@drawable/ic_twotone_keyboard_arrow_right_45"
+                    />
+
+                <View
+                    android:id="@+id/import_separator"
+                    android:layout_width="0.55dp"
+                    android:layout_height="40dp"
+                    android:layout_toEndOf="@+id/import_csv_icon"
+                    android:layout_centerVertical="true"
+                    android:background="@color/default_text_color"
+                    android:layout_margin="@dimen/default_element_margin"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/import_separator"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/default_element_margin"
+                    android:text="Importer mes mots de passe depuis un fichier CSV"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="@dimen/text_body_12"
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

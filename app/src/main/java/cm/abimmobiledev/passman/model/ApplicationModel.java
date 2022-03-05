@@ -14,15 +14,19 @@ public class ApplicationModel {
     private String password;
 
     @Nullable
+    private String username;
+
+    @Nullable
     private String logo;
 
     private boolean isSavedOnline = false;
 
-    public ApplicationModel(@Nullable String name, @Nullable String description, @Nullable String password, @Nullable String logo) {
+    public ApplicationModel(@Nullable String name, @Nullable String description, @Nullable String username,  @Nullable String password, @Nullable String logo) {
         this.name = name;
         this.description = description;
         this.password = password;
         this.logo = logo;
+        this.username = username;
     }
 
     public boolean isSavedOnline() {
@@ -67,5 +71,14 @@ public class ApplicationModel {
 
     public void setLogo(@Nullable String logo) {
         this.logo = logo;
+    }
+
+    @Nullable
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@Nullable String username) {
+        this.username = username;
     }
 }

@@ -80,7 +80,7 @@ public class SignUpViewModel extends BaseObservable {
         notifyPropertyChanged(BR.fullAccount);
     }
 
-    @Bindable
+    /*@Bindable
     public String getEncryptionNotHashedKey(){
         return signUpModel.getEncryptionNotHashedKey();
     }
@@ -88,7 +88,7 @@ public class SignUpViewModel extends BaseObservable {
     public void  setEncryptionNotHashedKey(String encryptionNotHashedKey){
         signUpModel.setEncryptionNotHashedKey(encryptionNotHashedKey);
         notifyPropertyChanged(BR.encryptionNotHashedKey);
-    }
+    }*/
 
     public SignUpViewModel() {
         signUpModel = new SignUpModel("", "", "",  "","", "", "");

@@ -1,5 +1,6 @@
 package cm.abimmobiledev.passman.ui.user;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding activitySignUpBinding;
     private static final String TAG_SIGN = "PM_SIGN_UP";
     ProgressDialog userInsertProgress;
+    AlertDialog.Builder dialogAccountCreation;
 
 
     @Override
@@ -37,6 +39,11 @@ public class SignUpActivity extends AppCompatActivity {
         activitySignUpBinding.setSignUpViewModel(new SignUpViewModel());
         activitySignUpBinding.executePendingBindings();
 
+        dialogAccountCreation = Util.getDialog(SignUpActivity.this, "Creation Compte", "Erreur lors de la création...");
+        dialogAccountCreation.setPositiveButton("OK", (dialog, which) -> {
+            //just close
+
+        });
         activitySignUpBinding.goToSignIn.setOnClickListener(v -> Navigator.openSignInPage(SignUpActivity.this));
 
 
@@ -62,9 +69,9 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 String hashedPass = Util.computeHash(signUpViewModel.getPassword());
-                String hashedKey = Util.computeHash(signUpViewModel.getEncryptionNotHashedKey());
+              //  String hashedKey = Util.computeHash(signUpViewModel.getEncryptionNotHashedKey());
                 User user = new User(signUpViewModel.getNames(),
-                        signUpViewModel.getUsername(), hashedPass, hashedKey,
+                        signUpViewModel.getUsername(), hashedPass, hashedPass,
                         signUpViewModel.getPhone(), signUpViewModel.getEmail(), fullAcc
                 );
 
@@ -96,7 +103,11 @@ public class SignUpActivity extends AppCompatActivity {
 
             } else {
                 Log.d(TAG_SIGN, "doInBackground: user already exist, username :"+testUserExistence.getUsername());
-                runOnUiThread(() -> Snackbar.make(activitySignUpBinding.getRoot(), "Le nom d'utilisateur est déjà pris, bien vouloir choisir un autre", Snackbar.LENGTH_LONG).show());
+                runOnUiThread(() -> {
+                    dialogAccountCreation.setMessage("Le nom d'utilisateur est déjà pris, bien vouloir choisir un autre");
+                    dialogAccountCreation.show();
+                });
+                return;
             }
 
 
