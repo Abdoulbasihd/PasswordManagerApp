@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Passwords</string>
+    <string name="app_name">Pwd Vault</string>
     <string name="user_name">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="sign_in">Se connecter</string>
